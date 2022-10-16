@@ -1,11 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        input{
+            display: block;
+            margin: 10px;
+        }
+    </style>
 </head>
+
 <body>
+    <div id="test">
+        <login_form>
+        <hr />
+        {{greeting}}
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        let test = Vue.createApp({
+            data: function () {
+                return {
+                    greeting: 'Hello World!'
+                }
+            }
+        })
+        test.component('login_form', {
+            template: `
+                <form @submit="handleSubmit">
+                    <h1>{{title}} </h1>
+                    <input type="email"/>
+                    <input type="password"/>
+                <form>
+            `,
+            data: function() {
+                return {
+                    title: 'Login Form'
+                }
+            },
+            methods:{
+                handleSubmit() {
+                    console.log('submit')
+                }
+            }
+        })
+        test.mount('#test')
+    </script>
 </body>
+
 </html>
