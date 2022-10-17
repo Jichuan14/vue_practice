@@ -34,18 +34,23 @@
             template: `
                 <form @submit="handleSubmit">
                     <h1>{{title}} </h1>
-                    <input type="email"/>
-                    <input type="password"/>
-                <form>
+                    <input type="email" v-model="email" />
+                    <input type="password" v-model="password"/>
+                    <button>{{button_text}}</button>
+                </form>
             `,
             data: function() {
                 return {
-                    title: 'Login Form'
+                    title: 'Login Form',
+                    button_text: 'Login',
+                    email: '',
+                    password: ''
                 }
             },
             methods:{
-                handleSubmit() {
-                    console.log('submit')
+                handleSubmit(e) {
+                    e.preventDefault(),
+                    console.log(this.email, this.password)
                 }
             }
         })
