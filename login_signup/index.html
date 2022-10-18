@@ -34,8 +34,8 @@
             template: `
                 <form @submit="handleSubmit">
                     <h1>{{title}} </h1>
-                    <custom_input type="email" v-model="email" />
-                    <custom_input type="password" v-model="password"/>
+                    <custom_input type="email" v-model="email" v-bind:label="email_label" />
+                    <custom_input type="password" v-bind:label="password_label" />
                     <button>{{button_text}}</button>
                 </form>
             `,
@@ -45,7 +45,9 @@
                     title: 'Login Form',
                     button_text: 'Login',
                     email: '',
-                    password: ''
+                    password: '',
+                    email_label: 'Email',
+                    password_label: 'Password'
                 }
             },
             methods:{
@@ -58,9 +60,11 @@
         test.component('custom_input', {
             template: `
                 <label>
+                    {{label}}
                     <input type="email">
                 </label>
-            `
+            `,
+            props:['label']
         })
         test.mount('#test')
     </script>
