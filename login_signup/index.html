@@ -1,11 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        input{
+            display: block;
+            margin: 10px;
+        }
+    </style>
 </head>
+
 <body>
+    <div id="test">
+        <login_form>
+        <hr />
+        {{greeting}}
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        let test = Vue.createApp({
+            data: function () {
+                return {
+                    greeting: 'Hello World!'
+                }
+            }
+        })
+        test.component('login_form', {
+            template: `
+                <form @submit="handleSubmit">
+                    <h1>{{title}} </h1>
+                    <custom_input type="email" v-model="email" v-bind:label="email_label" />
+                    <custom_input type="password" v-bind:label="password_label" />
+                    <button>{{button_text}}</button>
+                </form>
+            `,
+            components: ['custom_input'],
+            data: function() {
+                return {
+                    title: 'Login Form',
+                    button_text: 'Login',
+                    email: '',
+                    password: '',
+                    email_label: 'Email',
+                    password_label: 'Password'
+                }
+            },
+            methods:{
+                handleSubmit(e) {
+                    e.preventDefault(),
+                    console.log(this.email, this.password)
+                }
+            }
+        })
+        test.component('custom_input', {
+            template: `
+                <label>
+                    {{label}}
+                    <input type="email">
+                </label>
+            `,
+            props:['label']
+        })
+        test.mount('#test')
+    </script>
 </body>
+
 </html>
