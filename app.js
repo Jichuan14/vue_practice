@@ -1,0 +1,21 @@
+const app=Vue.createApp({
+    data(){
+        return{
+            name:"jichuan",
+            age:"18",
+            show_content:false,
+        }
+    }, 
+    methods:{
+        add_age(){
+            this.age++;
+        },
+        change_name(new_name){
+            this.name=new_name;
+        },
+        display_content(){
+            this.show_content=!this.show_content;
+        }
+    }
+})
+app.mount('#app')
