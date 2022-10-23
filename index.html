@@ -1,24 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .box {
+            margin-top: 60px;
+            width: 600px;
+            height: 600px;
+            background-color: grey;
+        }
+        .fav {
+            background-color: pink;
+        }
+    </style>
 </head>
+
 <body>
-   <div id="app">
-    <button @click="display_content">
-        <span v-if="show_content">Hide</span>
-        <span v-else>Show</span>
-    </button>
-    <div v-if="show_content">
-        <p>{{name}}--{{age}}</p>
-        <button v-on:click="add_age">Increase age</button>
-        <button v-on:click="change_name('random name')">Change name</button>
+    <div id="app">
+        <button @click="display_content">
+            <span v-if="show_content">Hide</span>
+            <span v-else>Show</span>
+        </button>
+        <div v-if="show_content">
+            <p>{{name}}--{{age}}</p>
+            <button v-on:click="add_age">Increase age</button>
+            <button v-on:click="change_name('random name')">Change name</button>
+        </div>
+        <div class="box" @mousemove="handleMouseover">Mousemove--{{x}}--{{y}}</div>
+        <ul>
+            <li v-for="i in filteredName" @click="change_fav(i)" :class="{fav: fav_coding(i)}" >
+                <p>{{i.name}}</p>
+                <p>{{i.age}}</p>
+            </li>
+        </ul>
     </div>
-   </div>
-   <script src="app.js"></script> 
+    <script src="app.js"></script>
 </body>
+
 </html>
